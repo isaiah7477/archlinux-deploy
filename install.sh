@@ -118,6 +118,6 @@ cp -r files/* /mnt
 chmod 0440 /mnt/etc/sudoers
 
 echo -e "\nInstalling packages..."
-arch-chroot /mnt pacman -S - < pkglist
+arch-chroot /mnt pacman -S --needed --noconfirm - < pkglist.std
 
 echo -e "\nInstallation complete!"
