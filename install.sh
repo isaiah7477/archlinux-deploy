@@ -120,4 +120,13 @@ chmod 0440 /mnt/etc/sudoers
 echo -e "\nInstalling packages..."
 arch-chroot /mnt pacman -S - < pkglist
 
+echo -e "\nCloning dotfiles..."
+userhome = /mnt/$username
+mkdir $userhome/dotfiles
+git init --bare $userhome/dotfiles
+cd $userhome/dotfiles && git config init.defaultBranch main
+git --git-dir-$userhome/dotfiles --work-tree=$userhome config status.showUntrackedFiles no
+rm -rf .config $userhome/.*
+git --git-dir-$userhome/dotfiles --work-tree=$userhome pull --set-upstream https://github.com/isaiah7477/dotfiles
+
 echo -e "\nInstallation complete!"
