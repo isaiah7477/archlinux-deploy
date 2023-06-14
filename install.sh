@@ -113,6 +113,10 @@ echo -e "\nInstalling bootloader..."
 arch-chroot /mnt grub-install "${device}" # Install grub
 arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg # Generate grub config
 
+echo -e "\nCopying system files..."
+cp -r files/* /mnt
+chmod 0440 /mnt/etc/sudoers
+
 echo -e "\nInstalling packages..."
 arch-chroot /mnt pacman -S - < pkglist
 
