@@ -1,7 +1,8 @@
-systemctl enable --now NetworkManager.service
-systemctl enable --now bluetooth.service
-systemctl enable --now sshd.service
-systemctl enable --now cups.socket
+systemctl enable --now \
+	NetworkManager.service \
+	bluetooth.service \
+	sshd.service \
+	cups.socket
 
 echo -e "\nCloning dotfiles..."
 mkdir $HOME/dotfiles
