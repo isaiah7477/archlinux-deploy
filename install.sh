@@ -106,7 +106,7 @@ echo "${hostname}" > /mnt/etc/hostname #Set hostname
 
 # Create users and set passwords
 arch-chroot /mnt useradd -m -G wheel,uucp,video,audio,storage,input "$username"
-echo "$user:$password" | chpasswd --root /mnt
+echo "$username:$password" | chpasswd --root /mnt
 echo "root:$password" | chpasswd --root /mnt
 
 arch-chroot /mnt grub-install "${device}" # Install grub
