@@ -90,7 +90,7 @@ mkdir /mnt/etc/ && touch /mnt/etc/fstab
 genfstab -U /mnt >> /mnt/etc/fstab # Generate fstab file
 
 echo "Installing base packages..."
-pacstrap -K /mnt base linux linux-firmware
+pacstrap -K /mnt base linux linux-firmware grub
 
 arch-chroot /mnt ln -sf /usr/share/zoneinfo/MST /etc/localtime
 arch-chroot /mnt hwclock --systohc
@@ -106,8 +106,8 @@ echo "${hostname}" > /mnt/etc/hostname #Set hostname
 
 # Create users and set passwords
 arch-chroot /mnt useradd -m -G wheel,uucp,video,audio,storage,input "$username"
-echo "$username:$password" | chpasswd --root /mnt
-echo "root:$password" | chpasswd --root /mnt
+echo "$username:$userpass" | chpasswd --root /mnt
+echo "root:$rootpass" | chpasswd --root /mnt
 
 arch-chroot /mnt grub-install "${device}" # Install grub
 arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg # Generate grub config
