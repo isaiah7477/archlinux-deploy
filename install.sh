@@ -70,26 +70,26 @@ if [[ $(yes_or_no "Proceed with installation?") ]]; then
 	echo "Installation aborted"
 	exit 1
 else
-	echo "Starting installation..."
+	echo -e "\nStarting installation..."
 fi
 
-echo "Creating partitions..."
+echo -e "\nCreating partitions..."
 parted --script "${device}" -- mklabel msdos \
 	mkpart primary ext4 1Mib 100%
 mkfs.ext4 /dev/sda1 # Create root filesystem
 mount /dev/sda1 /mnt # Mount root partition
 
-echo "Creating swap file..."
+echo -e "\nCreating swap file..."
 dd if=/dev/zero of=/mnt/swapfile bs=1M count=8K status=progress # Create swap file
 chmod 0600 /mnt/swapfile # Set proper permisions on swap file
 mkswap -U clear /mnt/swapfile # Format swap file
 swapon /mnt/swapfile # Activate the swap file
 
-echo "Generating fstab file"
+echo -e "\nGenerating fstab file"
 mkdir /mnt/etc/ && touch /mnt/etc/fstab
 genfstab -U /mnt >> /mnt/etc/fstab # Generate fstab file
 
-echo "Installing base packages..."
+echo -e "\nInstalling base packages..."
 pacstrap -K /mnt base linux linux-firmware grub
 
 arch-chroot /mnt ln -sf /usr/share/zoneinfo/MST /etc/localtime
@@ -109,5 +109,11 @@ arch-chroot /mnt useradd -m -G wheel,uucp,video,audio,storage,input "$username"
 echo "$username:$userpass" | chpasswd --root /mnt
 echo "root:$rootpass" | chpasswd --root /mnt
 
+echo -e "\nInstalling bootloader..."
 arch-chroot /mnt grub-install "${device}" # Install grub
 arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg # Generate grub config
+
+echo -e "\nInstalling packages..."
+arch-chroot /mnt pacman -S - < pkglist
+
+echo -e "\nInstallation complete!"
