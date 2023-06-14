@@ -6,8 +6,8 @@ systemctl enable --now cups.socket
 echo -e "\nCloning dotfiles..."
 mkdir $HOME/dotfiles
 git init --bare $HOME/dotfiles
-cd $HOME/dotfiles && git config init.defaultBranch main
-git --git-dir=$HOME/dotfiles --work-tree=$HOME config status.showUntrackedFiles no
+git --git-dir=$HOME/dotfiles --work-tree=$HOME branch -M main
+git --git-dir=$HOME/dotfiles --work-tree=$HOME config --local status.showUntrackedFiles no
 rm -rf .config $HOME/.*
 git --git-dir=$HOME/dotfiles --work-tree=$HOME pull --set-upstream https://github.com/isaiah7477/dotfiles
 
