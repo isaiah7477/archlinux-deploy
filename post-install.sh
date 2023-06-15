@@ -16,6 +16,7 @@ cd $HOME/.builds/dwm && sudo make clean install
 rm -rf $HOME/.dotfiles $HOME/.dotfiles.old
 
 echo -e "\nCloning dotfiles..."
+rm -rf $HOME/.dotfiles $HOME/.dotfiles.old
 git clone --bare https://github.com/isaiah7477/dotfiles.git $HOME/.dotfiles
 function config {
    /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME $@
