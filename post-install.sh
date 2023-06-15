@@ -7,7 +7,7 @@ systemctl enable --now \
 echo -e "\nInstalling aur packages..."
 mkdir $HOME/.builds
 git clone https://aur.archlinux.org/paru.git $HOME/.builds/paru
-cd /tmp/paru && makepkg -si --noconfirm
+cd $HOME/.builds/paru && makepkg -si --noconfirm
 paru -S --needed --noconfirm - < pkglist.aur
 
 echo -e "\nInstalling custom builds..."
