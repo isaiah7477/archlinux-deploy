@@ -1,5 +1,4 @@
 alacritty
-feh
 arduino
 atril
 base
@@ -15,6 +14,7 @@ cups-pdf
 dmenu
 dunst
 element-desktop
+feh
 figlet
 firefox
 flashrom
@@ -50,6 +50,7 @@ sxiv
 system-config-printer
 ttf-hack-nerd
 ttf-liberation
+udiskie
 unzip
 wmname
 xdotool
